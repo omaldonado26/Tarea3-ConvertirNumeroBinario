@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Conversor Binario</title>
+<style>
+  /* Contenedor general */
+  body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    color: #333;
+    margin: 0;
+    padding: 2rem;
+  }
+
+  .container {
+    max-width: 500px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  /* Estilo del campo de texto */
+  input[type="text"] {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Estilo de los botones */
+  .buttons {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+  }
+
+  button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  button[name="convert"] {
+    background: #007bff;
+    color: #fff;
+  }
+  button[name="convert"]:hover {
+    background: #0056b3;
+  }
+
+  button[name="clear"] {
+    background: #6c757d;
+    color: #fff;
+  }
+  button[name="clear"]:hover {
+    background: #5a6268;
+  }
+
+  /* Mensajes de error del formulario */
+  .errorlist {
+    color: #c00;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.9rem;
+  }
+
+  /* Resultado */
+  .result {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: #e9f7ef;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+  }
+
+  .result h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+  }
+
+  .result ul {
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+  .result li {
+    margin-bottom: 0.3rem;
+  }
+</style>
+
+</head>
+<body>
+  <div class="container">
+    <h1>Convertir binario</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.binary.label_tag }}
+      {{ form.binary }}
+      {{ form.binary.errors }}
+      <div class="buttons">
+        <button type="submit" name="convert">Convertir</button>
+        <button type="submit" name="clear">Limpiar</button>
+      </div>
+    </form>
+
+    {% if result %}
+      <div class="result">
+        <h2>Resultados:</h2>
+        <ul>
+          <li><strong>Binario:</strong> {{ result.binary }}</li>
+          <li><strong>Decimal:</strong> {{ result.decimal }}</li>
+          <li><strong>Octal:</strong> {{ result.octal }}</li>
+          <li><strong>Hexadecimal:</strong> {{ result.hexadecimal }}</li>
+        </ul>
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
